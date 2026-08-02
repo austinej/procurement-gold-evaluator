@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10 — Procurement Gold Standard Evaluator | ContractVault</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVBAR — ContractVault Branded
+  ═══════════════════════════════════════════════════════ -->
+  <nav class="cv-navbar">
+    <div class="cv-navbar__brand">
+      <span class="cv-navbar__logo">⚖️</span>
+      <span class="cv-navbar__name">ContractVault</span>
+      <span class="cv-navbar__module-tag">Module 10</span>
+    </div>
+    <a href="https://contractvault.netlify.app" class="cv-navbar__back-btn">
+      ← Back to ContractVault
+    </a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section class="cv-hero">
+    <div class="cv-hero__eyebrow">Procurement Intelligence</div>
+    <h1 class="cv-hero__title">
+      Procurement Gold Standard Evaluator
+    </h1>
+    <p class="cv-hero__subtitle">
+      The world's first continuously updated Procurement Maturity &amp; Integrity Rating —
+      powered by behavioural AI, validated against global standards.
+    </p>
+    <div class="cv-hero__badge">
+      <span class="cv-badge cv-badge--gold">CVR™ Rated</span>
+      <span class="cv-badge cv-badge--cobalt">PMM Engine</span>
+      <span class="cv-badge cv-badge--outline">Integrity Indexed</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN APP CONTAINER
+  ═══════════════════════════════════════════════════════ -->
+  <main class="cv-main" id="app">
+
+    <!-- STEP PROGRESS INDICATOR -->
+    <div class="cv-progress" id="progressBar">
+      <div class="cv-progress__track">
+        <div class="cv-progress__fill" id="progressFill"></div>
+      </div>
+      <div class="cv-progress__label" id="progressLabel">Question 1 of 14</div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SCREEN 1 — ONBOARDING / WELCOME
+    ───────────────────────────────────────────────────── -->
+    <div class="cv-screen active" id="screen-welcome">
+      <div class="cv-card cv-card--welcome">
+        <div class="cv-card__icon">🏛️</div>
+        <h2 class="cv-card__title">Welcome to the PMM Assessment</h2>
+        <p class="cv-card__body">
+          This assessment evaluates your organisation's
+          <strong>Procurement Maturity</strong> and <strong>Integrity Index</strong>
+          across 7 core domains using real-world procurement scenarios.
+        </p>
+        <ul class="cv-info-list">
+          <li>📋 <strong>14 scenario-based questions</strong> — no tick boxes</li>
+          <li>⏱️ <strong>Approximately 8–10 minutes</strong> to complete</li>
+          <li>🔒 <strong>Integrity signals are embedded</strong> — answer honestly</li>
+          <li>📊 <strong>Your CVR™ Rating</strong> is generated instantly on completion</li>
+        </ul>
+
+        <!-- Onboarding Fields -->
+        <div class="cv-form-group">
+          <label class="cv-label" for="orgName">Organisation Name</label>
+          <input
+            type="text"
+            id="orgName"
+            class="cv-input"
+            placeholder="e.g. Acme Infrastructure Ltd"
+          />
+        </div>
+
+        <div class="cv-form-group">
+          <label class="cv-label" for="orgSector">Sector</label>
+          <select id="orgSector" class="cv-select">
+            <option value="">— Select your sector —</option>
+            <option value="construction">Construction &amp; Infrastructure</option>
+            <option value="hospitality">Hospitality &amp; Real Estate</option>
+            <option value="oil_gas">Oil, Gas &amp; Energy</option>
+            <option value="public">Public Sector &amp; Government</option>
+            <option value="professional">Professional Services</option>
+            <option value="it">IT &amp; Technology</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="cv-form-group">
+          <label class="cv-label" for="spendBracket">Annual Procurement Spend Bracket</label>
+          <select id="spendBracket" class="cv-select">
+            <option value="">— Select your spend bracket —</option>
+            <option value="micro">Micro — Under $5M</option>
+            <option value="standard">Standard — $5M to $50M</option>
+            <option value="commercial">Commercial — $50M to $500M</option>
+            <option value="enterprise">Enterprise — $500M+</option>
+            <option value="public_sector">Public Sector</option>
+          </select>
+        </div>
+
+        <div class="cv-form-group">
+          <label class="cv-label" for="responderRole">Your Role</label>
+          <select id="responderRole" class="cv-select">
+            <option value="">— Select your role —</option>
+            <option value="cpo">Chief Procurement Officer</option>
+            <option value="procurement_manager">Procurement Manager</option>
+            <option value="contract_manager">Contract Manager</option>
+            <option value="commercial_manager">Commercial Manager</option>
+            <option value="finance">Finance Director / CFO</option>
+            <option value="operations">Operations Director</option>
+            <option value="consultant">External Consultant</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <button class="cv-btn cv-btn--primary" id="startAssessmentBtn">
+          Begin Assessment →
+        </button>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SCREEN 2 — SJT QUESTION DISPLAY
+    ───────────────────────────────────────────────────── -->
+    <div class="cv-screen" id="screen-questions">
+      <div class="cv-card cv-card--question">
+
+        <!-- Domain Tag -->
+        <div class="cv-question__domain-tag" id="questionDomain">Domain 01</div>
+
+        <!-- Question Number & Text -->
+        <div class="cv-question__number" id="questionNumber">Question 1 of 14</div>
+        <h2 class="cv-question__text" id="questionText">
+          Question text loads here
+        </h2>
+
+        <!-- Answer Options -->
+        <div class="cv-options" id="optionsContainer">
+          <!-- Options injected by app.js -->
+        </div>
+
+        <!-- Navigation -->
+        <div class="cv-question__nav">
+          <button class="cv-btn cv-btn--ghost" id="prevBtn">← Previous</button>
+          <button class="cv-btn cv-btn--primary" id="nextBtn" disabled>
+            Next Question →
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SCREEN 3 — PROCESSING / ANALYSING
+    ───────────────────────────────────────────────────── -->
+    <div class="cv-screen" id="screen-processing">
+      <div class="cv-card cv-card--processing">
+        <div class="cv-spinner"></div>
+        <h2 class="cv-processing__title">Analysing Your Procurement Profile</h2>
+        <p class="cv-processing__body">
+          The PMM engine is calculating your maturity scores,
+          running integrity pattern analysis, and applying the
+          Integrity Coefficient across all 7 domains.
+        </p>
+        <div class="cv-processing__steps" id="processingSteps">
+          <div class="cv-step" id="step1">⏳ Scoring domain maturity...</div>
+          <div class="cv-step" id="step2">⏳ Running integrity pattern detection...</div>
+          <div class="cv-step" id="step3">⏳ Applying Integrity Coefficient...</div>
+          <div class="cv-step" id="step4">⏳ Calculating Final PMM Score...</div>
+          <div class="cv-step" id="step5">⏳ Generating CVR™ Rating...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SCREEN 4 — RESULTS REPORT
+    ───────────────────────────────────────────────────── -->
+    <div class="cv-screen" id="screen-results">
+
+      <!-- CVR Rating Banner -->
+      <div class="cv-cvr-banner" id="cvrBanner">
+        <div class="cv-cvr-banner__label">CVR™ Rating</div>
+        <div class="cv-cvr-banner__tier" id="cvrTier">—</div>
+        <div class="cv-cvr-banner__name" id="cvrName">—</div>
+        <div class="cv-cvr-banner__tagline" id="cvrTagline">—</div>
+      </div>
+
+      <!-- Score Summary Cards -->
+      <div class="cv-score-summary">
+        <div class="cv-score-card">
+          <div class="cv-score-card__label">PMM Score</div>
+          <div class="cv-score-card__value" id="pmmScore">—</div>
+          <div class="cv-score-card__sub">out of 100</div>
+        </div>
+        <div class="cv-score-card">
+          <div class="cv-score-card__label">Maturity Index</div>
+          <div class="cv-score-card__value" id="maturityIndex">—</div>
+          <div class="cv-score-card__sub">out of 100</div>
+        </div>
+        <div class="cv-score-card cv-score-card--integrity" id="integrityCard">
+          <div class="cv-score-card__label">Integrity Index</div>
+          <div class="cv-score-card__value" id="integrityIndex">—</div>
+          <div class="cv-score-card__sub" id="integrityStatus">—</div>
+        </div>
+      </div>
+
+      <!-- Domain Breakdown -->
+      <div class="cv-card cv-card--report">
+        <h3 class="cv-report__section-title">Domain Breakdown</h3>
+        <div class="cv-domain-grid" id="domainBreakdown">
+          <!-- Domain rows injected by app.js -->
+        </div>
+      </div>
+
+      <!-- Integrity Flags -->
+      <div class="cv-card cv-card--report" id="integrityFlagsCard">
+        <h3 class="cv-report__section-title">⚠️ Integrity Observations</h3>
+        <div id="integrityFlags">
+          <!-- Flags injected by app.js -->
+        </div>
+      </div>
+
+      <!-- Narrative Summary -->
+      <div class="cv-card cv-card--report">
+        <h3 class="cv-report__section-title">Assessment Summary</h3>
+        <p class="cv-report__narrative" id="reportNarrative">—</p>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="cv-card cv-card--report">
+        <h3 class="cv-report__section-title">Priority Recommendations</h3>
+        <div id="recommendations">
+          <!-- Injected by app.js -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cv-report__actions">
+        <button class="cv-btn cv-btn--primary" id="downloadPdfBtn">
+          ⬇️ Download PDF Report
+        </button>
+        <button class="cv-btn cv-btn--ghost" id="restartBtn">
+          🔄 Retake Assessment
+        </button>
+        <a href="https://contractvault.netlify.app" class="cv-btn cv-btn--outline">
+          ← Back to ContractVault
+        </a>
+      </div>
+
+    </div>
+    <!-- end screen-results -->
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="cv-footer">
+    <p>© 2026 Austine Jarome. All Rights Reserved.</p>
+    <p>ContractVault is the intellectual property of Austine Jarome.</p>
+    <p class="cv-footer__tagline">
+      Capability without integrity is not maturity — it is sophisticated risk.
+    </p>
+  </footer>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+
+</body>
+</html>
