@@ -1,0 +1,1005 @@
+/* ═══════════════════════════════════════════════════════════
+   CONTRACTVAULT — MODULE 10
+   Procurement Gold Standard Evaluator
+   Design System: Navy + Gold + Cobalt | Playfair + Inter
+   © 2026 Austine Jarome. All Rights Reserved.
+═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+───────────────────────────────────────────────────────── */
+:root {
+  /* Colours */
+  --bg-navy:        #0A0F1E;
+  --bg-card:        #12182B;
+  --bg-card-hover:  #161D30;
+  --border:         #1C2540;
+  --border-light:   #243060;
+
+  --gold:           #FFD700;
+  --gold-dim:       #B8960C;
+  --gold-glow:      rgba(255, 215, 0, 0.15);
+  --gold-glow-soft: rgba(255, 215, 0, 0.06);
+
+  --cobalt:         #1E6FFF;
+  --cobalt-dim:     #1450BB;
+  --cobalt-glow:    rgba(30, 111, 255, 0.15);
+
+  --white:          #F8F9FF;
+  --muted:          #8892B0;
+  --success:        #00D4AA;
+  --warning:        #FF9500;
+  --danger:         #FF4444;
+
+  /* Typography */
+  --font-heading:   'Playfair Display', serif;
+  --font-body:      'Inter', sans-serif;
+
+  /* Spacing */
+  --radius-sm:      6px;
+  --radius-md:      12px;
+  --radius-lg:      20px;
+  --radius-xl:      28px;
+
+  /* Shadows */
+  --shadow-card:    0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold:    0 0 32px rgba(255, 215, 0, 0.12);
+  --shadow-cobalt:  0 0 32px rgba(30, 111, 255, 0.12);
+
+  /* Transitions */
+  --transition:     all 0.25s ease;
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. RESET & BASE
+───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   3. NAVBAR
+───────────────────────────────────────────────────────── */
+.cv-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(10, 15, 30, 0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cv-navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cv-navbar__logo {
+  font-size: 22px;
+}
+
+.cv-navbar__name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.cv-navbar__module-tag {
+  background: var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cv-navbar__back-btn {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 20px;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.cv-navbar__back-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+  background: var(--gold-glow-soft);
+}
+
+/* ─────────────────────────────────────────────────────────
+   4. HERO SECTION
+───────────────────────────────────────────────────────── */
+.cv-hero {
+  text-align: center;
+  padding: 72px 24px 48px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cv-hero__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.cv-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.cv-hero__subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cv-hero__badge {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   5. BADGES
+───────────────────────────────────────────────────────── */
+.cv-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.cv-badge--gold {
+  background: var(--gold-glow);
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+}
+
+.cv-badge--cobalt {
+  background: var(--cobalt-glow);
+  color: var(--cobalt);
+  border: 1px solid var(--cobalt-dim);
+}
+
+.cv-badge--outline {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* ─────────────────────────────────────────────────────────
+   6. MAIN CONTAINER
+───────────────────────────────────────────────────────── */
+.cv-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   7. PROGRESS BAR
+───────────────────────────────────────────────────────── */
+.cv-progress {
+  margin-bottom: 32px;
+  display: none;
+}
+
+.cv-progress.visible {
+  display: block;
+}
+
+.cv-progress__track {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.cv-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--cobalt));
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.cv-progress__label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: right;
+  letter-spacing: 0.3px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   8. SCREENS (Show / Hide Logic)
+───────────────────────────────────────────────────────── */
+.cv-screen {
+  display: none;
+}
+
+.cv-screen.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   9. CARDS
+───────────────────────────────────────────────────────── */
+.cv-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+}
+
+.cv-card--welcome {
+  border-color: var(--gold-dim);
+  box-shadow: var(--shadow-gold);
+}
+
+.cv-card--question {
+  border-color: var(--border-light);
+}
+
+.cv-card--processing {
+  text-align: center;
+  border-color: var(--cobalt-dim);
+  box-shadow: var(--shadow-cobalt);
+}
+
+.cv-card--report {
+  margin-bottom: 20px;
+}
+
+.cv-card__icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.cv-card__title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.cv-card__body {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────
+   10. INFO LIST (Welcome Screen)
+───────────────────────────────────────────────────────── */
+.cv-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(255, 215, 0, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.cv-info-list li {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.cv-info-list li strong {
+  color: var(--white);
+}
+
+/* ─────────────────────────────────────────────────────────
+   11. FORM ELEMENTS
+───────────────────────────────────────────────────────── */
+.cv-form-group {
+  margin-bottom: 20px;
+}
+
+.cv-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.cv-input,
+.cv-select {
+  width: 100%;
+  background: var(--bg-navy);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 12px 16px;
+  transition: var(--transition);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.cv-input::placeholder {
+  color: var(--muted);
+}
+
+.cv-input:focus,
+.cv-select:focus {
+  outline: none;
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+.cv-select option {
+  background: var(--bg-card);
+  color: var(--white);
+}
+
+/* ─────────────────────────────────────────────────────────
+   12. BUTTONS
+───────────────────────────────────────────────────────── */
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 14px 28px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.cv-btn--primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #0A0F1E;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.cv-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+}
+
+.cv-btn--primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cv-btn--ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.cv-btn--ghost:hover {
+  color: var(--white);
+  border-color: var(--border-light);
+}
+
+.cv-btn--outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+}
+
+.cv-btn--outline:hover {
+  background: var(--gold-glow);
+}
+
+/* ─────────────────────────────────────────────────────────
+   13. QUESTION SCREEN
+───────────────────────────────────────────────────────── */
+.cv-question__domain-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  background: var(--cobalt-glow);
+  border: 1px solid var(--cobalt-dim);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.cv-question__number {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.cv-question__text {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 3vw, 23px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 28px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   14. ANSWER OPTIONS
+───────────────────────────────────────────────────────── */
+.cv-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.cv-option {
+  background: var(--bg-navy);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+}
+
+.cv-option:hover {
+  border-color: var(--gold-dim);
+  background: var(--gold-glow-soft);
+}
+
+.cv-option.selected {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+  box-shadow: 0 0 0 1px var(--gold-dim);
+}
+
+.cv-option__letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.cv-option.selected .cv-option__letter {
+  background: var(--gold);
+  color: var(--bg-navy);
+}
+
+.cv-option__text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 400;
+  transition: var(--transition);
+}
+
+.cv-option.selected .cv-option__text {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────────────────
+   15. QUESTION NAVIGATION
+───────────────────────────────────────────────────────── */
+.cv-question__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cv-question__nav .cv-btn--ghost {
+  width: auto;
+  padding: 12px 22px;
+}
+
+.cv-question__nav .cv-btn--primary {
+  width: auto;
+  margin-top: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   16. PROCESSING SCREEN
+───────────────────────────────────────────────────────── */
+.cv-spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 28px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.cv-processing__title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.cv-processing__body {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.cv-processing__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.cv-step {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-navy);
+  transition: var(--transition);
+}
+
+.cv-step.done {
+  color: var(--success);
+  border-color: var(--success);
+  background: rgba(0, 212, 170, 0.06);
+}
+
+/* ─────────────────────────────────────────────────────────
+   17. CVR RATING BANNER
+───────────────────────────────────────────────────────── */
+.cv-cvr-banner {
+  text-align: center;
+  padding: 48px 32px;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--gold-dim);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.08) 0%,
+    rgba(10, 15, 30, 0.95) 60%
+  );
+  box-shadow: var(--shadow-gold);
+  margin-bottom: 24px;
+}
+
+.cv-cvr-banner--suspended {
+  border-color: var(--danger);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 68, 68, 0.08) 0%,
+    rgba(10, 15, 30, 0.95) 60%
+  );
+  box-shadow: 0 0 32px rgba(255, 68, 68, 0.15);
+}
+
+.cv-cvr-banner--provisional {
+  border-color: var(--warning);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 149, 0, 0.08) 0%,
+    rgba(10, 15, 30, 0.95) 60%
+  );
+}
+
+.cv-cvr-banner__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.cv-cvr-banner__tier {
+  font-family: var(--font-heading);
+  font-size: clamp(48px, 10vw, 80px);
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.cv-cvr-banner__name {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.cv-cvr-banner__tagline {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────────────────
+   18. SCORE SUMMARY CARDS
+───────────────────────────────────────────────────────── */
+.cv-score-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cv-score-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.cv-score-card--integrity {
+  border-color: var(--success);
+  background: rgba(0, 212, 170, 0.04);
+}
+
+.cv-score-card--integrity.flagged {
+  border-color: var(--warning);
+  background: rgba(255, 149, 0, 0.04);
+}
+
+.cv-score-card--integrity.critical {
+  border-color: var(--danger);
+  background: rgba(255, 68, 68, 0.04);
+}
+
+.cv-score-card__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.cv-score-card__value {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.cv-score-card__sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────────────────
+   19. DOMAIN BREAKDOWN GRID
+───────────────────────────────────────────────────────── */
+.cv-report__section-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-domain-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cv-domain-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.cv-domain-row__name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.cv-domain-row__bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.cv-domain-row__bar {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--cobalt), var(--gold));
+  transition: width 0.6s ease;
+}
+
+.cv-domain-row__score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ─────────────────────────────────────────────────────────
+   20. INTEGRITY FLAGS
+───────────────────────────────────────────────────────── */
+.cv-flag {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--warning);
+  background: rgba(255, 149, 0, 0.06);
+  margin-bottom: 12px;
+}
+
+.cv-flag--critical {
+  border-color: var(--danger);
+  background: rgba(255, 68, 68, 0.06);
+}
+
+.cv-flag--clean {
+  border-color: var(--success);
+  background: rgba(0, 212, 170, 0.06);
+}
+
+.cv-flag__icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.cv-flag__body {
+  flex: 1;
+}
+
+.cv-flag__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.cv-flag__desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────
+   21. REPORT NARRATIVE & RECOMMENDATIONS
+───────────────────────────────────────────────────────── */
+.cv-report__narrative {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.cv-recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-navy);
+  margin-bottom: 12px;
+}
+
+.cv-recommendation__number {
+  width: 28px;
+  height: 28px;
+  background: var(--cobalt-glow);
+  border: 1px solid var(--cobalt-dim);
+  border-radius: 50%;
+  color: var(--cobalt);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cv-recommendation__text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cv-recommendation__text strong {
+  color: var(--white);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   22. REPORT ACTIONS
+───────────────────────────────────────────────────────── */
+.cv-report__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  justify-content: center;
+}
+
+.cv-report__actions .cv-btn {
+  width: auto;
+  margin-top: 0;
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   23. FOOTER
+───────────────────────────────────────────────────────── */
+.cv-footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.cv-footer__tagline {
+  color: var(--gold-dim);
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   24. RESPONSIVE — MOBILE
+───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+
+  .cv-navbar {
+    padding: 14px 20px;
+  }
+
+  .cv-navbar__back-btn {
+    font-size: 12px;
+    padding: 7px 14px;
+  }
+
+  .cv-hero {
+    padding: 48px 16px 32px;
+  }
+
+  .cv-card {
+    padding: 28px 20px;
+  }
+
+  .cv-score-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-domain-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .cv-domain-row__bar-wrap {
+    display: none;
+  }
+
+  .cv-report__actions {
+    flex-direction: column;
+  }
+
+  .cv-report__actions .cv-btn {
+    width: 100%;
+  }
+
+  .cv-question__nav {
+    flex-direction: column;
+  }
+
+  .cv-question__nav .cv-btn {
+    width: 100%;
+  }
+}
